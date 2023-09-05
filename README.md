@@ -1,5 +1,7 @@
 # Signature - Digital Task Roster Application
 
+![Task management UI](./Task%20Management%20Dashboard.png)
+
 Welcome to "Signature," a digital task roster application designed to simplify task management and enhance collaboration within teams and organizations.
 
 ## Table of Contents
