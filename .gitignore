@@ -59,3 +59,4 @@ coverage/
 # important files
 signature-db486-firebase-adminsdk-7t93r-4cbb89bc8b.json
 request.rest
+server/config
