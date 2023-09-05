@@ -53,24 +53,24 @@ Before you begin, ensure you have met the following requirements:
 
 1. Clone the repository:
 
-   ```
-   git clone https://github.com/sammiearchie77/signature.git
-   ```
+```
+git clone https://github.com/sammiearchie77/signature.git
+```
 
 2. Install dependencies for both the frontend and backend:
 
-    ```
-    cd signature
-    yarn install
-    ```
+```
+cd signature
+yarn install
+```
 
 3. Configure your environment variables. You can use .env.example files as templates.
 
 4. Start the development servers:
 
-    ```
-        yarn run development
-    ```
+```
+yarn run development
+```
 
 5. Open your web browser and access the application at <http://localhost:3000>.
 
