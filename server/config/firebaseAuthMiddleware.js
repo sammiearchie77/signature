@@ -1,11 +1,10 @@
 // firebaseAuthMiddleware.js
-const admin = require('firebase-admin');
+import { auth } from 'firebase-admin';
 
 function firebaseAuthMiddleware(req, res, next) {
   const idToken = req.headers.authorization;
 
-  admin
-    .auth()
+  auth()
     .verifyIdToken(idToken)
     .then((decodedToken) => {
       req.user = decodedToken;
@@ -16,4 +15,4 @@ function firebaseAuthMiddleware(req, res, next) {
     });
 }
 
-module.exports = firebaseAuthMiddleware;
+export default firebaseAuthMiddleware;
