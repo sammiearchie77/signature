@@ -1,0 +1,50 @@
+
+# GET Home page
+
+GET http://localhost:3000/
+
+###
+
+DELETE  http://localhost:5000/api/v1/users/Qfm9PeporgXsd6WcmKgv5b4nKgA3
+
+###
+POST  http://localhost:3000/api/auth/signup
+Content-Type: application/json
+
+# {
+#   "username": "John Braide",
+#   "email": "Johnny@email.com",
+#   "password": "john123Pass"
+# }
+
+{
+  "username": "Admin",
+  "email": "Admin@email.com",
+  "password": "Admin123Pass",
+  "roles": ["admin"]
+}
+
+###
+POST   http://localhost:3000/api/auth/signin
+Content-Type: application/json
+
+{
+  "email": "Johnny@email.com",
+  "password": "john123Pass"
+}
+
+###
+GET http://localhost:3000/api/v1/users
+
+###
+PUT  http://localhost:3000/api/v1/users/650086a87be6a6ccac60aec0
+Content-Type: application/json
+
+{
+  "username": "John Braide",
+  "email": "Johnny@email.com",
+  "password": "john123Pass"
+}
+
+###
+DELETE  http://localhost:3000/api/v1/users/650086a87be6a6ccac60aec0"
