@@ -8,7 +8,7 @@ const compress = require('compression')
 const cors = require('cors')
 const helmet = require('helmet')
 const morgan = require('morgan')
-const connectDB = require('./config/db')
+require('./config/db')
 
 
 
@@ -21,6 +21,8 @@ app.use(helmet())
 app.use(cors())
 
 // Connect to MongoDB
+
+
 require('./routes/auth.route')(app);
 require('./routes/user.route')(app);
 
@@ -37,6 +39,9 @@ app.get("/", (req, res) => {
 })
 
 
-app.listen(3000, (err)=> {
-    console.log("Express app started on port 3000")
+app.listen(5000, (err)=> {
+    if (err){
+        console.log(`Error: ${err}`)
+    }
+    console.log("Express app started on port 5000")
 })

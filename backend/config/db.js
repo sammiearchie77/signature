@@ -53,3 +53,5 @@ function initial() {
     }
   });
 }
+
+module.exports = initial();
