@@ -1,12 +1,18 @@
 
-# GET Home page
+# BASE_URL
 
-GET http://localhost:3000/
+GET http://localhost:5000/
 
-###
+# User Routes
+# /api/test/all
+# /api/auth/me
+# /api/test/mod
+# /api/test/admin
 
-DELETE  http://localhost:5000/api/v1/users/Qfm9PeporgXsd6WcmKgv5b4nKgA3
 
+
+# Auth Routes
+# /api/auth/signup
 ###
 POST  http://localhost:5000/api/auth/signup
 Content-Type: application/json
@@ -18,13 +24,6 @@ Content-Type: application/json
   "roles": ["user"]
 }
 
-
-# {
-#   "username": "John Braide",
-#   "email": "Johnny@email.com",
-#   "password": "john123Pass"
-# }
-
 # {
 #   "username": "Admin",
 #   "email": "Admin@email.com",
@@ -32,32 +31,73 @@ Content-Type: application/json
 #   "roles": ["admin"]
 # }
 
+# {
+#   "username": "John Braide",
+#   "email": "Johnny@email.com",
+#   "password": "john123Pass"
+# }
+
+# /api/auth/signin
 ###
-POST   http://localhost:5000/api/auth/signin
+POST  http://localhost:5000/api/auth/signin
 Content-Type: application/json
 
 {
-  "username": "Samuel",
+  "email": "Samuel@email.com",
   "password": "Samuel123Pass"
 }
 
 # {
-#   "username": "Admin",
-#   "password": "Admin123Pass"
+#   "email": "Samuel@email.com",
+#   "password": "Samuel123Pass"
 # }
 
-###
-GET http://localhost:3000/api/v1/users
+{
+  "email": "Admin@email.com",
+  "password": "Admin123Pass"
+}
+
+
+# Project API test
 
 ###
-PUT  http://localhost:3000/api/v1/users/650086a87be6a6ccac60aec0
+GET https://localhost:5000/api/projects/
+
+###
+POST https://localhost:5000/api/projects
 Content-Type: application/json
 
 {
-  "username": "John Braide",
-  "email": "Johnny@email.com",
-  "password": "john123Pass"
+  "title": "Project one",
+  "description": "Build a backend project",
+  "team": "Node js"
 }
 
 ###
-DELETE  http://localhost:3000/api/v1/users/650086a87be6a6ccac60aec0"
+GET https://localhost:5000/api/projects
+
+###
+PUT https://localhost:5000/api/projects/
+
+###
+DELETE https://localhost:5000/api/projects/
+
+
+
+# Task API test 
+# /api/tasks/:taskId
+###
+GET https://localhost:5000/api/tasks/
+
+###
+POST https://localhost:5000/api/tasks
+
+###
+GET https://localhost:5000/api/tasks
+
+###
+PUT https://localhost:5000/api/tasks/
+
+###
+DELETE https://localhost:5000/api/tasks/
+
