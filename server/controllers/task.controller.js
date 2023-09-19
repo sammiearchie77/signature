@@ -6,7 +6,7 @@ const create = async (req, res, next) => {
     try {
         await task.save()
         return res.status(201).json({
-            message: 'Successfully created!'
+            message: 'Task successfully created!'
         })
     } catch (err) {
         console.log(`Task create error: ${err}`)

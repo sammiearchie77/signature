@@ -21,9 +21,6 @@ app.use(helmet())
 app.use(cors())
 app.use(morgan('short'))
 
-app.use('/', userRoutes)
-app.use('/', authRoutes)
-app.use('/', projectRoutes)
-app.use('/', taskRoutes)
+app.use('/api/v1', require('./routes/index.route'))
 
 module.exports =  app

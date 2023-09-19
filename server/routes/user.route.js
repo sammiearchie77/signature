@@ -1,18 +1,16 @@
 const express = require('express');
 const userCtrl = require('../controllers/user.controller')
-const { verifySignUp } = require("../middlewares");
+const { verifyToken } = require("../middlewares");
 
 const router = express.Router();
 
-router.route('/api/users')
-    .get(userCtrl.list)
+router.route('/')
+    .get(userCtrl.getAll)
     .post(userCtrl.create)
 
-router.route('/api/users/:userId')
-    .get(userCtrl.read)
+router.route('/:userId')
+    .get(userCtrl.getOne)
     .put(userCtrl.update)
-    .delete(userCtrl.remove)
-
-router.param('userId', userCtrl.userByID)
+    .delete(userCtrl.delete)
 
 module.exports = router;

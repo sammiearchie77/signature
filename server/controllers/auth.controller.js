@@ -1,55 +1,44 @@
-const config = require("../config/auth.config");
-const User = require('../models/user.model');
+const AuthService = require('../services/auth.service');
+const response = require('../utils/response');
 
-let jwt = require("jsonwebtoken");
+class AuthController {
+    async signup(req, res) {
+        const result = await AuthService.signup(req.body);
+        res.status(201).send(response.success(`User successfully created: ${JSON.stringify(result)}`));
+    }
 
+    async signin(req, res) {
+        const result = await AuthService.signin(req.body);
+        res.status(200).send(response.success(`User login successful: ${JSON.stringify(result)}`));
+    }
 
-const signin = (req, res) => {
-    User.findOne({
-        email: req.body.email
-    })
-    .exec((err, user) => {
-        if (err) {
-            res.status(500).send({ message: err });
-            return;
-        }
-        if (!user) {
-            return res.status(404).send({ message: "User Not found." });
-        }
-        let passwordIsValid = bcrypt.compareSync(
-            req.body.password,
-            user.password
-        );
-        if (!passwordIsValid) {
-            return res.status(401).send({
-                accessToken: null,
-                message: "Invalid Password!"
-            });
-        }
-        const token = jwt.sign({ id: user.id },
-            config.secret,
-            {
-                algorithm: 'HS256',
-                allowInsecureKeySizes: true,
-                expiresIn: 86400, // 24 hours
-            });
-        res.status(200).send({
-            id: user._id,
-            username: user.username,
-            email: user.email,
-            roles: authorities,
-            accessToken: token
-        });
-    });
-};
+    async updatePassword(req, res) {
+        const result = await AuthService.updatePassword(req.params.userId, req.body);
+        res.status(200).send(response.success(`Password updated: ${JSON.stringify(result)}`));
+    }
 
-const signout = (req, res) => {
-    res.clearCookie("t")
-    return res.status('200').json({
-        message: "signed out"
-    })
+    async RequestEmailVerification(req, res) {
+        const result = await AuthService.RequestEmailVerification(req.params.email);
+        res
+            .status(200)
+            .send(response.success(`Email verification link sent: ${result}`))
+    }
+
+    async VerifyEmail(req, res) {
+        const result = await AuthServ.VerifyEmail(req.body);
+        res
+            .status(200)
+            .send(response.success("Email verified successfully", result));
+    }
+
+    async RequestPasswordReset(req, res) {
+        const result = await AuthServ.RequestPasswordReset(req.query.email);
+        res.status(200).send(response.success("Password reset link sent", result));
+    }
+    async resetPassword(req, res) {
+        const result = await AuthServ.resetPassword(req.body);
+        res.status(200).send(response.success("Password updated", result));
+    }
 }
 
-module.exports = {
-    signin, signout
-}
+module.exports = new AuthController;

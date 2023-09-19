@@ -1,14 +1,36 @@
-const express = require('express')
-const router = express.Router();
-const { authJwt } = require("../middlewares");
-const controller = require("../controllers/auth.controller");
+const router = require("express").Router();
+const { bodyValidation, Schemas } = require("../validators/joi");
+const AuthController = require("../controllers/auth.controller");
 
-
-
-router.route("/api/auth/signin")
-  .post(controller.signin);
-
-router.route('/api/auth/signout')
-  .get(controller.signout);
+router.post(
+  "/signup",
+  bodyValidation(Schemas.userSchema),
+  AuthController.signup
+);
+router.post(
+  "/signin",
+  bodyValidation(Schemas.loginSchema),
+  AuthController.signin
+);
+router.post(
+  "/request-email-verification",
+  bodyValidation(Schemas.verifyEmailSchema),
+  AuthController.RequestEmailVerification
+);
+router.post(
+  "/verify-email",
+  bodyValidation(Schemas.verifyEmailSchema),
+  AuthController.VerifyEmail
+);
+router.post(
+  "/request-password-reset",
+  bodyValidation(Schemas.requestPasswordResetSchema),
+  AuthController.RequestPasswordReset
+);
+router.post(
+  "/reset-password",
+  bodyValidation(Schemas.resetPasswordSchema),
+  AuthController.resetPassword
+);
 
 module.exports = router;
