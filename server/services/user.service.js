@@ -29,9 +29,11 @@ class UserService {
     }
 
     async delete(userId) {
-        const user = await User.findOne({ _id: userId });
+        const user = await User.deleteOne({ _id: userId });
+        if (!user) throw new CustomError("User does not exist")
+        // Trigger cascading deletion through Mongoose middleware
+        await user.remove();
         user.isActive = false;
-        user.save();
         return user;
     }
 }

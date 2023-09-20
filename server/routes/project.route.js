@@ -1,18 +1,16 @@
 const express = require('express');
 const projectCtrl = require('../controllers/project.controller')
-const { authJwt } = require("../middlewares")
+const { verifyToken } = require("../middlewares");
 
 const router = express.Router();
 
-router.route('/api/projects')
-    .get(projectCtrl.list)
+router.route('/')
+    .get(projectCtrl.getAll)
     .post(projectCtrl.create)
 
-router.route('/api/projects/:projectId')
-    .get(projectCtrl.read)
+router.route('/:projectId')
+    .get(projectCtrl.getOne)
     .put(projectCtrl.update)
-    .delete(projectCtrl.remove)
-
-router.param('projectId', projectCtrl.projectByID)
+    .delete(projectCtrl.delete)
 
 module.exports = router;

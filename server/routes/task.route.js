@@ -1,16 +1,16 @@
 const express = require('express');
 const taskCtrl = require('../controllers/task.controller')
+const { verifyToken } = require("../middlewares");
+
 const router = express.Router();
 
-router.route('/api/tasks')
-    .get(taskCtrl.list)
+router.route('/')
+    .get(taskCtrl.getAll)
     .post(taskCtrl.create)
 
-router.route('/api/tasks/:taskId')
-    .get(taskCtrl.read)
+router.route('/:taskId')
+    .get(taskCtrl.getOne)
     .put(taskCtrl.update)
-    .delete(taskCtrl.remove)
-
-router.param('taskId', taskCtrl.taskByID)
+    .delete(taskCtrl.delete)
 
 module.exports = router;
