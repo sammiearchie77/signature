@@ -41,7 +41,6 @@ class AuthService {
         if (!user) throw new CustomError(`Incorrect email, please scrutinize..`);
 
         // Check if password is correct
-        console.log(user.password)
         const isCorrect = await bcrypt.compare(data.password, user.password);
         if (!isCorrect) throw new CustomError(`Incorrect password, please scrutinize..`);
         const token = await JWT.sign({ id: user._id, role: user.role }, JWTSecret, {

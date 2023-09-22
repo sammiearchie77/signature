@@ -1,46 +1,77 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const app = require('./express'); // Replace with the path to your Express app
-const { expect } = chai;
+const app = require('../../express');
+const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('Authentication Routes', () => {
-  describe('POST /signup', () => {
+describe('user Routes', () => {
+ 
+  // Define variables for testing data here
+
+  describe('GET /users', () => {
+    it('should return a list of users', (done) => {
+      chai
+        .request(app)
+        .get('/users')
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an('array');
+          done();
+        });
+    });
+  });
+
+  describe('POST /users', () => {
     it('should create a new user', (done) => {
       chai
         .request(app)
-        .post('/signup')
-        .send({
-          nfirstname: 'John',
-          lastname: 'Doe',
-          email: 'johndoe@example.com',
-          password: 'securepassword',
-        })
+        .post('/users')
+        .send({ /* Define your request body here */ })
         .end((err, res) => {
           expect(res).to.have.status(201);
-          // Add more assertions to validate the response or user creation
+          expect(res.body).to.be.an('object');
           done();
         });
     });
   });
 
-  describe('POST /signin', () => {
-    it('should authenticate a user', (done) => {
+  describe('GET /users/:userId', () => {
+    it('should return a specific user', (done) => {
       chai
         .request(app)
-        .post('/signin')
-        .send({
-          email: 'johndoe@example.com',
-          password: 'securepassword',
-        })
+        .get('/users/:userId')
         .end((err, res) => {
           expect(res).to.have.status(200);
-          // Add more assertions to validate the response or user authentication
+          expect(res.body).to.be.an('object');
           done();
         });
     });
   });
 
-  // Add similar test cases for other routes (e.g., /request-email-verification, /verify-email, etc.)
+  describe('PUT /users/:userId', () => {
+    it('should update a specific user', (done) => {
+      chai
+        .request(app)
+        .put('/users/:userId')
+        .send({ /* Define your request body for updating here */ })
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an('object');
+          done();
+        });
+    });
+  });
+
+  describe('DELETE /users/:userId', () => {
+    it('should delete a specific user', (done) => {
+      chai
+        .request(app)
+        .delete('/users/:userId')
+        .end((err, res) => {
+          expect(res).to.have.status(204);
+          done();
+        });
+    });
+  });
 });

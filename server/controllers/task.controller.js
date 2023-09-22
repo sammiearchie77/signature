@@ -1,10 +1,10 @@
-const TaskService = require('../services/user.service');
+const TaskService = require('../services/task.service');
 const response = require('../utils/response')
 
 class TaskController {
   async create(req, res) {
     const result = await TaskService.create(req.body);
-    res.status(200).send(response.success(`Task created: ${JSON.stringify(result)}`));
+    res.status(201).send(response.success(`Task created: ${JSON.stringify(result)}`));
   }
 
   async getAll(req, res) {
@@ -24,7 +24,7 @@ class TaskController {
 
   async delete(req, res) {
     const result = await TaskService.delete(req.params.taskId);
-    res.status(200).send(response.success(`Task deleted: ${JSON.stringify(result)}`));
+    res.status(204).send(response.success(`Task deleted: ${JSON.stringify(result)}`));
   }
 }
 

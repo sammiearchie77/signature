@@ -1,10 +1,10 @@
-const ProjectService = require('../services/user.service');
+const ProjectService = require('../services/project.service');
 const response = require('../utils/response')
 
 class ProjectController {
   async create(req, res) {
     const result = await ProjectService.create(req.body);
-    res.status(200).send(response.success(`Project created: ${JSON.stringify(result)}`));
+    res.status(204).send(response.success(`Project created: ${JSON.stringify(result)}`));
   }
 
   async getAll(req, res) {
@@ -24,7 +24,7 @@ class ProjectController {
 
   async delete(req, res) {
     const result = await ProjectService.delete(req.params.projectId);
-    res.status(200).send(response.success(`Project deleted: ${JSON.stringify(result)}`));
+    res.status(204).send(response.success(`Project deleted: ${JSON.stringify(result)}`));
   }
 }
 

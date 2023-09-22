@@ -1,47 +1,61 @@
 const chai = require('chai');
-const chaiHttp = require('chai-http');
-const should = chai.should(); // Enable should-style syntax
-const sinon = require('sinon');
-const AuthController = require('../../controllers/auth.controller');
+const expect = chai.expect;
 const AuthService = require('../../services/auth.service');
-const response = require('../../utils/response');
 
-chai.use(chaiHttp);
-
-describe('AuthController', () => {
-  // Mock AuthService methods to isolate controller tests
-  before(() => {
-    sinon.stub(AuthService, 'signup').resolves({ userId: '123' });
-    sinon.stub(AuthService, 'signin').resolves({ userId: '123' });
-    sinon.stub(AuthService, 'updatePassword').resolves({ message: 'Password updated' });
-    sinon.stub(AuthService, 'RequestEmailVerification').resolves('Verification link sent');
-    sinon.stub(AuthService, 'VerifyEmail').resolves({ message: 'Email verified' });
-    sinon.stub(AuthService, 'RequestPasswordReset').resolves('Password reset link sent');
-    sinon.stub(AuthService, 'resetPassword').resolves({ message: 'Password updated' });
-  });
-
-  after(() => {
-    // Restore AuthService methods
-    sinon.restore();
-  });
-
+describe('AuthService', () => {
   describe('signup', () => {
-    it('should create a new user and return success response', async () => {
-      const req = { body: { /* user data */ } };
-      const res = {
-        status: (statusCode) => {
-          statusCode.should.equal(201);
-          return res;
-        },
-        send: (data) => {
-          // Add your assertions for the response here
-          data.should.include('User successfully created');
-        },
+    it('should create a new user and return a token', async () => {
+      // Mock user data for signup
+      const userData = {
+        firstname: 'John',
+        lastname: 'Doe',
+        email: 'johndoe@example.com',
+        password: 'securePassword',
+        role: 'user',
       };
 
-      await AuthController.signup(req, res);
+      try {
+        const result = await AuthService.signup(userData);
+
+        // Assert that the result contains necessary properties
+        expect(result).to.have.property('uid');
+        expect(result).to.have.property('firstname');
+        expect(result).to.have.property('lastname');
+        expect(result).to.have.property('email');
+        expect(result).to.have.property('role');
+        expect(result).to.have.property('token');
+      } catch (error) {
+        // Handle errors
+        throw error;
+      }
     });
   });
 
-  // Similar test cases for other AuthController methods (signin, updatePassword, etc.)
+  describe('signin', () => {
+    it('should sign in a user and return a token', async () => {
+      // Mock user data for signin
+      const userData = {
+        email: 'johndoe@example.com',
+        password: 'securePassword',
+      };
+
+      try {
+        const result = await AuthService.signin(userData);
+
+        // Assert that the result contains necessary properties
+        expect(result).to.have.property('uid');
+        expect(result).to.have.property('firstname');
+        expect(result).to.have.property('lastname');
+        expect(result).to.have.property('email');
+        expect(result).to.have.property('role');
+        expect(result).to.have.property('verified');
+        expect(result).to.have.property('token');
+      } catch (error) {
+        // Handle errors
+        throw error;
+      }
+    });
+  });
+
+  // Add more test cases for other AuthService methods here
 });

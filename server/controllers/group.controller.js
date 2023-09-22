@@ -4,7 +4,7 @@ const response = require('../utils/response')
 class GroupController {
   async create(req, res) {
     const result = await GroupService.create(req.body);
-    res.status(200).send(response.success(`Group created: ${JSON.stringify(result)}`));
+    res.status(201).send(response.success(`Group created: ${JSON.stringify(result)}`));
   }
 
   async getAll(req, res) {
@@ -24,7 +24,7 @@ class GroupController {
 
   async delete(req, res) {
     const result = await GroupService.delete(req.params.groupId);
-    res.status(200).send(response.success(`Group deleted: ${JSON.stringify(result)}`));
+    res.status(204).send(response.success(`Group deleted: ${JSON.stringify(result)}`));
   }
 }
 

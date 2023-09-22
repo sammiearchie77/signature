@@ -1,22 +1,30 @@
 const chai = require('chai');
 const sinon = require('sinon');
-const AuthController = require('../controllers/auth.controller');
-const AuthService = require('../services/auth.service');
-const CustomError = require('../utils/customError');
+const AuthController = require('../../controllers/auth.controller');
+const AuthService = require('../../services/auth.service');
+const CustomError = require('../../utils/customError');
 
 const should = chai.should();
+
+const data = 
+  {
+    firstname: "Samuel",
+    lastname: "Chinonso",
+    email: "archiechiso@gmail.com",
+    password: "Graceland!"
+  };
 
 describe('AuthController', () => {
   describe('signup', () => {
     it('should create a new user and return success response', async () => {
-      const req = { body: { /* user data */ } };
+      const req = { body: data };
       const res = {
         status: sinon.stub().returnsThis(),
         send: sinon.spy(),
       };
 
       // Mock the AuthService.signup method
-      sinon.stub(AuthService, 'signup').resolves({ /* user data */ });
+      sinon.stub(AuthService, 'signup').resolves(data);
 
       await AuthController.signup(req, res);
 
@@ -29,7 +37,7 @@ describe('AuthController', () => {
     });
 
     it('should handle signup failure and return an error response', async () => {
-      const req = { body: { /* invalid user data */ } };
+      const req = { body: data };
       const res = {
         status: sinon.stub().returnsThis(),
         send: sinon.spy(),

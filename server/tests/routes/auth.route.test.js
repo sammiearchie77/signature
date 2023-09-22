@@ -1,6 +1,6 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const app = require('./express'); // Replace with the path to your Express app
+const app = require('express')();
 const { expect } = chai;
 
 chai.use(chaiHttp);

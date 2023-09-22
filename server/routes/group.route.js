@@ -1,6 +1,6 @@
 const express = require('express');
 const groupCtrl = require('../controllers/group.controller')
-const { verifyToken } = require("../middlewares");
+// const { verifyToken } = require("../middlewares");
 
 const router = express.Router();
 

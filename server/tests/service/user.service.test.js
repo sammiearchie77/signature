@@ -1,90 +1,73 @@
 const chai = require('chai');
-const sinon = require('sinon');
+const expect = chai.expect;
 const UserService = require('../../services/user.service');
-const User = require('../../models/user.model');
-const CustomError = require('../../utils/customError');
-
-const should = chai.should();
 
 describe('UserService', () => {
-  // Create a spy for the User model's methods
-  const UserModel = {
-    create: sinon.spy(),
-    find: sinon.spy(),
-    findOne: sinon.spy(),
-    findByIdAndUpdate: sinon.spy(),
-  };
-
-  // Stub the User model to use the spy methods
-  before(() => {
-    sinon.stub(User, 'create').callsFake(UserModel.create);
-    sinon.stub(User, 'find').callsFake(UserModel.find);
-    sinon.stub(User, 'findOne').callsFake(UserModel.findOne);
-    sinon.stub(User, 'findByIdAndUpdate').callsFake(UserModel.findByIdAndUpdate);
-  });
-
-  // Restore the original methods after testing
-  after(() => {
-    sinon.restore();
-  });
+  let createdUserId;
 
   describe('create', () => {
     it('should create a new user', async () => {
-      const userData = { /* test data */ };
-
-      // Stub the create method to return a predefined user
-      UserModel.create.resolves(userData);
-
-      const result = await UserService.create(userData);
-
-      result.should.deep.equal(userData);
-      UserModel.create.calledOnce.should.be.true;
-    });
-  });
-
-  describe('getAll', () => {
-    it('should get all users', async () => {
-      const users = [{ /* user 1 data */ }, { /* user 2 data */ }];
-
-      // Stub the find method to return the list of users
-      UserModel.find.resolves(users);
-
-      const result = await UserService.getAll();
-
-      result.should.deep.equal(users);
-      UserModel.find.calledOnce.should.be.true;
-    });
-  });
-
-  describe('getOne', () => {
-    it('should get a user by ID', async () => {
-      const userId = '123';
-      const userData = { /* user data */ };
-
-      // Stub the findOne method to return the user data
-      UserModel.findOne.resolves(userData);
-
-      const result = await UserService.getOne(userId);
-
-      result.should.deep.equal(userData);
-      UserModel.findOne.calledOnce.should.be.true;
-    });
-
-    it('should throw an error if the user does not exist', async () => {
-      const userId = 'invalid-id';
-
-      // Stub the findOne method to return null (user not found)
-      UserModel.findOne.resolves(null);
+      // Mock user data for creation
+      const userData = {
+        firstname: 'John',
+        lastname: 'Doe',
+        email: 'johndoe@example.com',
+        password: 'securePassword',
+      };
 
       try {
-        await UserService.getOne(userId);
+        const user = await UserService.create(userData);
+
+        // Assert that the user object is created
+        expect(user).to.be.an('object');
+        expect(user).to.have.property('_id');
+        createdUserId = user._id; // Store the created user's ID for later tests
       } catch (error) {
-        error.should.be.an.instanceOf(CustomError);
-        error.message.should.equal('User does not exist');
-        UserModel.findOne.calledOnce.should.be.true;
+        // Handle errors
+        throw error;
       }
     });
   });
 
-  // Similar test cases for update and delete methods
+  describe('getAll', () => {
+    it('should return a list of users', async () => {
+      try {
+        const users = await UserService.getAll();
+
+        // Assert that the result is an array
+        expect(users).to.be.an('array');
+      } catch (error) {
+        // Handle errors
+        throw error;
+      }
+    });
+  });
+
+  describe('getOne', () => {
+    it('should return a specific user', async () => {
+      try {
+        const user = await UserService.getOne(createdUserId);
+
+        // Assert that the result is an object
+        expect(user).to.be.an('object');
+        expect(user).to.have.property('_id', createdUserId);
+      } catch (error) {
+        // Handle errors
+        throw error;
+      }
+    });
+
+    it('should throw an error for a non-existent user', async () => {
+      const nonExistentUserId = 'nonexistentuserid';
+
+      try {
+        await UserService.getOne(nonExistentUserId);
+      } catch (error) {
+        // Assert that the error message indicates that the user does not exist
+        expect(error.message).to.equal('User does not exist');
+      }
+    });
+  });
+
+  // Add test cases for update and delete methods
 });

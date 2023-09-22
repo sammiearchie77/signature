@@ -1,9 +1,16 @@
-import React from 'react'
+// App.js
+
+import React from 'react';
+import Sidebar from '../components/Sidebar';
+import Dashboard from '../components/Dashboard';
 
 function User() {
   return (
-    <div>User</div>
-  )
+    <div className="flex h-screen">
+      <Sidebar />
+      <Dashboard />
+    </div>
+  );
 }
 
-export default User
+export default User;

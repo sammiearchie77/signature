@@ -4,7 +4,7 @@ const response = require('../utils/response')
 class UserController {
   async create(req, res) {
     const result = await UserService.create(req.body);
-    res.status(200).send(response.success(`User created: ${JSON.stringify(result)}`));
+    res.status(201).send(response.success(`User created: ${JSON.stringify(result)}`));
   }
 
   async getAll(req, res) {
@@ -24,7 +24,7 @@ class UserController {
 
   async delete(req, res) {
     const result = await UserService.delete(req.params.userId);
-    res.status(200).send(response.success(`User deleted: ${JSON.stringify(result)}`));
+    res.status(204).send(response.success(`User deleted: ${JSON.stringify(result)}`));
   }
 }
 

@@ -43,21 +43,21 @@ userSchema.pre("save", async function (next) {
 });
 
 // Middleware to cascade delete related data
-userSchema.pre('remove', async function (next) {
-  const userId = this._id;
+// userSchema.pre('remove', async function (next) {
+//   const userId = this._id;
 
-  try {
-    // Delete related tasks
-    await Task.deleteMany({ user: userId });
-    // Delete related projects
-    await Project.deleteMany({ user: userId });
-    // Delete groups where the user is a member
-    await Group.updateMany({}, { $pull: { members: userId } });
-    // Continue with user deletion
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
+//   try {
+//     // Delete related tasks
+//     await Task.deleteOne({ user: userId });
+//     // Delete related projects
+//     await Project.deleteOne({ user: userId });
+//     // Delete groups where the user is a member
+//     await Group.updateMany({}, { $pull: { members: userId } });
+//     // Continue with user deletion
+//     next();
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 module.exports = mongoose.model("users", userSchema);
