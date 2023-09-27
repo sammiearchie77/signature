@@ -5,15 +5,15 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('user Routes', () => {
+describe('task Routes', () => {
  
   // Define variables for testing data here
 
-  describe('GET /users', () => {
-    it('should return a list of users', (done) => {
+  describe('GET /tasks', () => {
+    it('should return a list of tasks', (done) => {
       chai
         .request(app)
-        .get('/users')
+        .get('/tasks')
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.body).to.be.an('array');
@@ -22,11 +22,11 @@ describe('user Routes', () => {
     });
   });
 
-  describe('POST /users', () => {
-    it('should create a new user', (done) => {
+  describe('POST /tasks', () => {
+    it('should create a new task', (done) => {
       chai
         .request(app)
-        .post('/users')
+        .post('/tasks')
         .send({ /* Define your request body here */ })
         .end((err, res) => {
           expect(res).to.have.status(201);
@@ -36,11 +36,11 @@ describe('user Routes', () => {
     });
   });
 
-  describe('GET /users/:userId', () => {
-    it('should return a specific user', (done) => {
+  describe('GET /tasks/:taskId', () => {
+    it('should return a specific task', (done) => {
       chai
         .request(app)
-        .get('/users/:userId')
+        .get('/tasks/:taskId')
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.body).to.be.an('object');
@@ -49,11 +49,11 @@ describe('user Routes', () => {
     });
   });
 
-  describe('PUT /users/:userId', () => {
-    it('should update a specific user', (done) => {
+  describe('PUT /tasks/:taskId', () => {
+    it('should update a specific task', (done) => {
       chai
         .request(app)
-        .put('/users/:userId')
+        .put('/tasks/:taskId')
         .send({ /* Define your request body for updating here */ })
         .end((err, res) => {
           expect(res).to.have.status(200);
@@ -63,11 +63,11 @@ describe('user Routes', () => {
     });
   });
 
-  describe('DELETE /users/:userId', () => {
-    it('should delete a specific user', (done) => {
+  describe('DELETE /tasks/:taskId', () => {
+    it('should delete a specific task', (done) => {
       chai
         .request(app)
-        .delete('/users/:userId')
+        .delete('/tasks/:taskId')
         .end((err, res) => {
           expect(res).to.have.status(204);
           done();

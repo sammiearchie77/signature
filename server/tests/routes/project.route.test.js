@@ -1,19 +1,19 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const app = require('../../express');
+const app = require('../../express'); // Import your Express app
 const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('user Routes', () => {
+describe('Project Routes', () => {
  
   // Define variables for testing data here
 
-  describe('GET /users', () => {
-    it('should return a list of users', (done) => {
+  describe('GET /projects', () => {
+    it('should return a list of projects', (done) => {
       chai
         .request(app)
-        .get('/users')
+        .get('/projects')
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.body).to.be.an('array');
@@ -22,38 +22,38 @@ describe('user Routes', () => {
     });
   });
 
-  describe('POST /users', () => {
-    it('should create a new user', (done) => {
+  describe('POST /projects', () => {
+    it('should create a new project', (done) => {
       chai
         .request(app)
-        .post('/users')
+        .post('/projects')
         .send({ /* Define your request body here */ })
         .end((err, res) => {
-          expect(res).to.have.status(201);
-          expect(res.body).to.be.an('object');
+          expect(res).to.have.status(201); // Adjust status code as needed
+          expect(res.body).to.be.an('object'); // Adjust this based on your response structure
           done();
         });
     });
   });
 
-  describe('GET /users/:userId', () => {
-    it('should return a specific user', (done) => {
+  describe('GET /projects/:projectId', () => {
+    it('should return a specific project', (done) => {
       chai
         .request(app)
-        .get('/users/:userId')
+        .get('/projects/:projectId') // Replace :projectId with an actual project ID
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.body).to.be.an('object');
+          expect(res.body).to.be.an('object'); // Adjust this based on your response structure
           done();
         });
     });
   });
 
-  describe('PUT /users/:userId', () => {
-    it('should update a specific user', (done) => {
+  describe('PUT /projects/:projectId', () => {
+    it('should update a specific project', (done) => {
       chai
         .request(app)
-        .put('/users/:userId')
+        .put('/projects/:projectId')
         .send({ /* Define your request body for updating here */ })
         .end((err, res) => {
           expect(res).to.have.status(200);
@@ -63,11 +63,11 @@ describe('user Routes', () => {
     });
   });
 
-  describe('DELETE /users/:userId', () => {
-    it('should delete a specific user', (done) => {
+  describe('DELETE /projects/:projectId', () => {
+    it('should delete a specific project', (done) => {
       chai
         .request(app)
-        .delete('/users/:userId')
+        .delete('/projects/:projectId')
         .end((err, res) => {
           expect(res).to.have.status(204);
           done();
