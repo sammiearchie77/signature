@@ -31,7 +31,8 @@
     "mongoose": "^6.10.0",
     "morgan": "^1.10.0",
     "nodemailer": "^6.9.5",
-    "sinon-chai": "^3.7.0"
+    "sinon-chai": "^3.7.0",
+    "socket.io": "^4.7.2"
   },
   "devDependencies": {
     "@types/sinon": "^10.0.16",
