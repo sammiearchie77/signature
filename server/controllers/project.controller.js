@@ -4,7 +4,7 @@ const response = require('../utils/response')
 class ProjectController {
   async create(req, res) {
     const result = await ProjectService.create(req.body);
-    res.status(204).send(response.success(`Project created: ${JSON.stringify(result)}`));
+    res.status(201).send(response.success(`Project created: ${JSON.stringify(result)}`));
   }
 
   async getAll(req, res) {

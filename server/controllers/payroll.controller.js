@@ -4,7 +4,7 @@ const response = require('../utils/response')
 class PayrollController {
   async create(req, res) {
     const result = await PayrollService.create(req.body);
-    res.status(204).send(response.success(`Project created: ${JSON.stringify(result)}`));
+    res.status(201).send(response.success(`Project created: ${JSON.stringify(result)}`));
   }
 
   async getAll(req, res) {

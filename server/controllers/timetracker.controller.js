@@ -4,7 +4,7 @@ const response = require('../utils/response')
 class TimetrackerController {
   async create(req, res) {
     const result = await TimetrackerService.create(req.body);
-    res.status(204).send(response.success(`timetracker created: ${JSON.stringify(result)}`));
+    res.status(201).send(response.success(`timetracker created: ${JSON.stringify(result)}`));
   }
 
   async getAll(req, res) {

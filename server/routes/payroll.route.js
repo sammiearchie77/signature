@@ -1,5 +1,5 @@
 const express = require('express');
-const payrollCtrl = require('../controllers/group.controller')
+const payrollCtrl = require('../controllers/payroll.controller')
 // const { verifyToken } = require("../middlewares");
 
 const router = express.Router();

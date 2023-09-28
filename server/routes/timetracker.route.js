@@ -1,5 +1,5 @@
 const express = require('express');
-const timetrackerCtrl = require('../controllers/group.controller')
+const timetrackerCtrl = require('../controllers/timetracker.controller')
 // const { verifyToken } = require("../middlewares");
 
 const router = express.Router();
