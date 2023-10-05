@@ -32,7 +32,7 @@ class UserController {
   async update(req, res) {
     try {
       const result = await UserService.update(req.params.userId, req.body);
-      res.status(200).send(response.success(`User updated: ${JSON.stringify(result)}`));
+      res.status(201).send(response.success(`User updated: ${JSON.stringify(result)}`));
     } catch(err) {
       res.status(500).send(response.error(`User controller error updating data: ${JSON.stringify(err)}`));
     }

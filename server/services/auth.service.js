@@ -110,7 +110,7 @@ class AuthService {
             // Send Email
             await sendEmail(
                 user.email,
-                'Raveshift: Verify Email',
+                'Signature: Verify Email',
                 {
                     name: user.firstname,
                     link,
