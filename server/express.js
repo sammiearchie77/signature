@@ -4,7 +4,8 @@ const cookieParser = require('cookie-parser')
 const compress = require('compression')
 const cors = require('cors')
 const morgan = require('morgan')
-
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./swaggerConfig');
 const app = express()
 
 
@@ -14,7 +15,7 @@ app.use(cookieParser())
 app.use(compress())
 app.use(cors())
 app.use(morgan('short'))
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api/v1', require('./routes/index.route'))
 
 module.exports =  app

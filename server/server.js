@@ -1,5 +1,4 @@
 const config = require('./config/env');
-const content = require('./content')
 const http = require('http');
 const app = require('./express');
 const { Server } = require('socket.io');
